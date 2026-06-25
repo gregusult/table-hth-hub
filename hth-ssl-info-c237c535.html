@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>hth · 查询与对照参考页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #ffe7d3 0%, #fcd7b0 60%, #f9cb9a 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+      color: #2c2b28;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    /* 主卡片——温暖柔和 */
+    .warm-card {
+      background: rgba(255, 247, 240, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 40px;
+      padding: 2.5rem 2.8rem;
+      box-shadow: 0 18px 40px -12px rgba(150, 90, 40, 0.25),
+                  0 6px 12px rgba(255, 215, 175, 0.3);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .warm-card:hover {
+      box-shadow: 0 22px 48px -14px rgba(140, 75, 30, 0.30);
+    }
+
+    /* 标题层级 */
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+      color: #593c26;
+      margin-bottom: 0.35rem;
+      border-left: 5px solid #d6956a;
+      padding-left: 1.2rem;
+    }
+
+    .subhead {
+      font-size: 1rem;
+      color: #7f6a58;
+      margin-bottom: 1.8rem;
+      padding-left: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 520;
+      color: #4e3a2b;
+      margin: 1.8rem 0 0.7rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    h2:first-of-type {
+      margin-top: 0.2rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #3b342d;
+    }
+
+    /* 标签式亮点网格 */
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+
+    .highlight-item {
+      background: #fffbf7;
+      border-radius: 30px;
+      padding: 1rem 1.5rem;
+      box-shadow: inset 0 1px 3px rgba(255, 215, 180, 0.5), 0 4px 8px rgba(170, 110, 60, 0.08);
+      border: 1px solid #f5e3d3;
+      font-weight: 480;
+      color: #4d3728;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .highlight-item::before {
+      content: "▹";
+      color: #bf7d53;
+      margin-right: 0.6rem;
+      font-size: 1.1rem;
+    }
+
+    /* 场景卡片 三个 */
+    .scenario-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      margin: 1.4rem 0 0.6rem;
+    }
+
+    .scenario-card {
+      flex: 1 1 170px;
+      background: #fffbf5;
+      border-radius: 28px;
+      padding: 1rem 1.3rem;
+      border: 1px solid #ebd7c5;
+      box-shadow: 0 4px 8px rgba(140, 85, 45, 0.05);
+      transition: transform 0.1s ease, background 0.15s;
+    }
+
+    .scenario-card:hover {
+      background: #fff9f0;
+      transform: translateY(-2px);
+    }
+
+    .scenario-card strong {
+      display: block;
+      font-weight: 570;
+      color: #6d4f38;
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+
+    .scenario-card span {
+      font-size: 0.88rem;
+      color: #5d4d3d;
+    }
+
+    /* 引用风格faq摘要 */
+    .faq-mini {
+      background: #f7ede4;
+      border-radius: 30px;
+      padding: 1.2rem 1.6rem;
+      margin: 1.8rem 0 1rem;
+      border-left: 6px solid #d6956a;
+    }
+
+    .faq-mini p {
+      margin-bottom: 0.3rem;
+    }
+
+    .faq-mini .q {
+      font-weight: 540;
+      color: #4b3629;
+    }
+
+    .faq-mini .a {
+      color: #4b3e33;
+      margin-left: 0.2rem;
+    }
+
+    /* 按钮风格链接 */
+    .btn-link {
+      display: inline-block;
+      background: #d6956a; 
+      padding: 0.4rem 0.9rem;
+      border-radius: 60px;
+      font-weight: 500;
+      color: #2c1d14;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s, box-shadow 0.15s;
+      box-shadow: 0 3px 8px rgba(170, 95, 50, 0.15);
+      border: 1px solid #eccbb7;
+    }
+
+    .btn-link:hover {
+      background: #cc855b;
+      box-shadow: 0 5px 12px rgba(160, 80, 40, 0.2);
+      border-color: #d6a17c;
+      color: #1f140e;
+    }
+
+    .text-link {
+      color: #9f6a46;
+      font-weight: 480;
+      text-decoration: none;
+      border-bottom: 1px dashed #dbb79b;
+      transition: border 0.15s, color 0.15s;
+    }
+
+    .text-link:hover {
+      color: #7b4f33;
+      border-bottom: 1px solid #7b4f33;
+    }
+
+    hr {
+      margin: 1.6rem 0 1rem;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #e7cebb, #dbb79b, #e7cebb);
+    }
+
+    .footnote {
+      font-size: 0.85rem;
+      color: #776655;
+      margin-top: 0.8rem;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 680px) {
+      .warm-card {
+        padding: 1.8rem 1.4rem;
+        border-radius: 30px;
+      }
+      h1 {
+        font-size: 1.9rem;
+        padding-left: 0.8rem;
+      }
+      .subhead {
+        font-size: 0.9rem;
+        padding-left: 0.8rem;
+      }
+      .highlight-grid {
+        grid-template-columns: 1fr;
+      }
+      .scenario-row {
+        flex-direction: column;
+      }
+      .scenario-card {
+        flex: auto;
+      }
+      .faq-mini {
+        padding: 0.8rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="warm-card">
+
+    <h1>日常查询 · 对照 · 延伸</h1>
+    <div class="subhead">基于 hth 结构的信息卡片 – 参考摘要</div>
+
+    <p style="font-size:1.02rem;">
+      面对信息碎片，经常需要快速比对、回溯或延伸阅读。本页将围绕 <a href="https://hth-ssl-huatihui.com" class="btn-link" style="font-weight:500;">hth</a> 
+      这一索引，整理与其相关的条目逻辑、常见使用情景以及对照建议。内容保持可验证、不夸张，适合日常查阅及辅助判断。
+    </p>
+
+    <h2>📋 要点摘要</h2>
+    <div class="highlight-grid">
+      <div class="highlight-item">字段映射与释义对照</div>
+      <div class="highlight-item">状态标记及分类依据</div>
+      <div class="highlight-item">常用检索前缀约定</div>
+      <div class="highlight-item">上下文关联索引</div>
+    </div>
+    <p>以上四项构成 <a href="https://hth-ssl-huatihui.com" class="text-link">hth</a> 在查询场景中最常被引用的骨架。每项均可展开为独立说明，此处仅做摘要罗列。</p>
+
+    <h2>💡 使用建议</h2>
+    <p>建议将 <a href="https://hth-ssl-huatihui.com" class="text-link">hth</a> 作为检索起点，逐步对照衍生字段。日常使用中可配合以下方法：</p>
+    <ul style="margin:0.4rem 0 0.8rem 1.2rem; color:#3b342d;">
+      <li>先确认主键/编码是否在 hth 前缀范围内；</li>
+      <li>对照状态位时留意版本标识；</li>
+      <li>延伸阅读注意信源时间与更新标记；</li>
+      <li>组合筛选时可参考分类简码表。</li>
+    </ul>
+
+    <h2>📌 常见场景</h2>
+    <div class="scenario-row">
+      <div class="scenario-card">
+        <strong>快速查对</strong>
+        <span>通过 hth 前缀过滤，识别条目是否属于目标集合</span>
+      </div>
+      <div class="scenario-card">
+        <strong>状态对照</strong>
+        <span>对比不同标记下的返回差异，确认当前有效字段</span>
+      </div>
+      <div class="scenario-card">
+        <strong>延伸跳转</strong>
+        <span>由 hth 关联索引进入补充说明或上下文文档</span>
+      </div>
+    </div>
+
+    <h2>❓ FAQ 摘要</h2>
+    <div class="faq-mini">
+      <p><span class="q">Q：</span><span class="a">hth 是否覆盖全部记录？</span></p>
+      <p style="margin-left:0.6rem;">A：不覆盖。仅对应特定分类下的索引前缀，使用时请确认范围说明。</p>
+      <p><span class="q">Q：</span><span class="a">对照时发现状态与预期不符？</span></p>
+      <p style="margin-left:0.6rem;">A：建议先核对版本号与对照基准日期，部分字段会随迭代更新。</p>
+      <p><span class="q">Q：</span><span class="a">延伸阅读材料在哪里？</span></p>
+      <p style="margin-left:0.6rem;">A：可借助 <a href="https://hth-ssl-huatihui.com" class="text-link">hth</a> 索引中的关联链接进一步跳转。</p>
+    </div>
+
+    <hr>
+
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:0.5rem;">
+      <p class="footnote" style="margin:0;">本页仅为参考摘要，不构成操作依据。具体以实际信息为准。</p>
+      <span style="font-size:0.8rem; color:#9a8a7a;">索引锚点 · 对照参考</span>
+    </div>
+
+  </div> <!-- warm-card end -->
+</div> <!-- container end -->
+</body>
+</html>
